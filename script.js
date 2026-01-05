@@ -3,12 +3,14 @@ const listContainer = document.getElementById('extension-list');
 
 let allExtensions = [];
 
+//Load data
 async function loadExtensions() {
      try {
         const response = await fetch('data.json');
 
         const data = await response.json();
 
+        allExtensions = data;
         console.log("Du lieu nhan:", data);
 
         renderExtensions(data);
@@ -23,6 +25,7 @@ async function loadExtensions() {
     
 }
 
+//Render data
 function renderExtensions(extension){
     if(!listContainer) return;
 
@@ -40,22 +43,22 @@ function renderExtensions(extension){
         <article class="extension-card">
             <div class="card-header">
                 <img
-                    src="${item.logo}""
-                    alt="${item.name}
+                    src="${item.logo}"
+                    alt="${item.name}"
                     class="card-logo"
                     onerror="this.src='https://placehold.co/40x40?text=Icon'"
                 >
 
-                <h3 class"card-title">${item.name}</h3>
+                <h3 class="card-title">${item.name}</h3>
+            </div>
 
-                <p class="card-desc">${item.description}</p>
+            <p class="card-desc">${item.description}</p>
 
-                <div class="card-footer">
-                    <span class="status-badge ${statusClass}">${statusText}</span>
-                    <button class="btn-remove" onclick="removeExtension('${item.name}')">
-                        Remove
-                    </button>                
-                </div>
+            <div class="card-footer">
+                <span class="status-badge ${statusClass}">${statusText}</span>
+                <button class="btn-remove" onclick="removeExtension('${item.name}')">
+                    Remove
+                </button>                
             </div>
         </article>
         `;
@@ -74,3 +77,19 @@ function removeExtension(namToDelete){
 }
 
 loadExtensions();
+
+// DARK MODE
+const toggleButton = document.getElementById('theme-toggle');
+const body = document.body;
+
+if(toggleButton){
+    toggleButton.addEventListener('click',() =>{
+        body.classList.toggle('dark-mode');
+
+        if(body.classList.contains('dark-mode')){
+            toggleButton.textContent = "Light mode";
+        }else{
+            toggleButton.textContent = "Dark mode";
+        }
+    });
+}
