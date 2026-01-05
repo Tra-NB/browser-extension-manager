@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Browser Extensions Manager</title>
 
+    
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,16 +15,22 @@
 </head>
 <body>
     <header class="main-header">
-        <div class="container">
-            <h1>Extensions</h1>
-        </div>
+           <img src="./assets/images/logo.svg">
+        <button id="theme-toggle">
+            <img src="./assets/images/icon-moon.svg" class="icon" id="theme-icon">
+        </button>
     </header>
 
     <main class="container">
         <section class="control-bar">
             <h2>Extensions List</h2>
 
-            <button id="theme-toggle">Dark mode</button>
+            <div class="filter-group">
+                <button class="filter-btn active" onclick="filterData('all')">All</button>
+                <button class="filter-btn" onclick="filterData('active')">Active</button>
+                <button class="filter-btn" onclick="filterData('inactive')">Inactive</button>
+            </div>
+
         </section>
 
         <section id="extension-list" class="grid-container">
