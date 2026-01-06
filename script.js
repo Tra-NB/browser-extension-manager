@@ -66,6 +66,30 @@ function renderExtensions(extension){
 
 
 
+let currentFilter = 'all';
+
+// Lọc dữ liệu
+function filterData(status) {
+
+    currentFilter = status;
+
+    const buttons = document.querySelectorAll('.filter-group button');
+    buttons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.status === status);
+    });
+
+    let filteredExtensions = [];
+
+   if (status === 'all') { 
+    filteredExtensions = allExtensions; 
+    } else { 
+        const isActive = status === 'active'; 
+        filteredExtensions = allExtensions.filter(item => item.isActive === isActive); 
+    }
+
+    renderExtensions(filteredExtensions);
+}
+
 function handleToggle(name){
     allExtensions = allExtensions.map(item => {
         if(item.name === name){
@@ -74,7 +98,7 @@ function handleToggle(name){
         return item;
     });
 
-    renderExtensions(allExtensions);    
+   filterData(currentFilter); 
 }
 
 function removeExtension(nameToDelete){
@@ -105,27 +129,4 @@ if(toggleButton && themeIcon){
     });
 }
 
-// Lọc dữ liệu
-function filterData(status) {
-    
-    const buttons = document.querySelectorAll('.filter-group button');
-    buttons.forEach(btn => {
-        btn.classList.remove('active'); 
-        
-        if (btn.innerText.toLowerCase() === status) {
-            btn.classList.add('active');
-        }
-    });
 
-    let filteredExtensions = [];
-
-    if (status === 'all') {
-        filteredExtensions = allExtensions;
-    } else if (status === 'active') {
-        filteredExtensions = allExtensions.filter(item => item.isActive === true);
-    } else if (status === 'inactive') {
-        filteredExtensions = allExtensions.filter(item => item.isActive === false);
-    }
-
-    renderExtensions(filteredExtensions);
-}
