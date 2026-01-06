@@ -1,28 +1,25 @@
 
-const listContainer = document.getElementById('extension-list');
 
+const listContainer = document.getElementById('extension-list');
 let allExtensions = [];
 
-//Load data
+// Load data
 async function loadExtensions() {
-     try {
+    try {
         const response = await fetch('data.json');
 
         const data = await response.json();
 
         allExtensions = data;
-        console.log("Du lieu nhan:", data);
 
         renderExtensions(data);
-        
-     } catch (error) {
-        console.error("Loi khi tai du lieu:", error);
-        if (listContainer){
-            listContainer.innerHTML = `<p style="color: red; text-align: center;">Loi ket noi! Khong tai duoc du lieu.</p>`;
+    } catch (error) {
+        console.error("Loi du lieu:", error);
+
+        if(listContainer){
+            listContainer.innerHTML = `<p style= "color : red; text-align: center;">Loi ket noi! Khong tai duoc du lieu.</p>`
         }
-        
-     }
-    
+    }
 }
 
 //Render data
@@ -67,6 +64,8 @@ function renderExtensions(extension){
     listContainer.innerHTML = htmlContent;
 }
 
+
+
 function handleToggle(name){
     allExtensions = allExtensions.map(item => {
         if(item.name === name){
@@ -78,10 +77,10 @@ function handleToggle(name){
     renderExtensions(allExtensions);    
 }
 
-function removeExtension(namToDelete){
-    const isConfirmed = confirm(`Ban chac muon xoa "${namToDelete}" khong?`);
+function removeExtension(nameToDelete){
+    const isConfirmed = confirm(`Ban chac muon xoa "${nameToDelete}" khong?`);
     if(isConfirmed){
-        allExtensions = allExtensions.filter(item => item.name !== namToDelete);
+        allExtensions = allExtensions.filter(item => item.name !== nameToDelete);
 
         renderExtensions(allExtensions);
     }

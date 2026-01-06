@@ -30,11 +30,11 @@
     /* Light mode */
     --bg-body: var(--grad-light);
     --bg-component: #FFFFFF;
-    --bg-card: #ffffff;
+    --bg-card: #e8e7e7be;
     --text-main: var(--neutral-900);
     --text-sub: var(--neutral-600);
+    --text-filter: var(--neutral-200);
     --border: var(--neutral-300);
-    --accent: #ff6b6b;
     --bg-filter: #ffff;
     --shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
@@ -43,9 +43,10 @@
     body.dark-mode{
         --bg-body: var(--grad-dark);
         --bg-component: #1C1F2E;
-        --bg-card: #161b22;
+        --bg-card: #d0d0d042;
         --text-main: #F9FAFB;
         --text-sub: #c0c6d0;
+        --text-filter: #050f53;
         --border: #2D303E;
         --bg-filter: #2d303e;
         --shadow: 0 4px 12px rgba(0,0,0,0.5);
@@ -101,7 +102,7 @@
     #theme-toggle{
         padding: 8px 20px;
         background-color: var(--bg-card);
-        border: 1px solid var(--border);
+        border: none;
         color: var(--text-main);
         border-radius: 10px;
         font-family: var(--font-main);
@@ -130,27 +131,28 @@
             gap: 12px;
         }
 
-        .filter-btn {
-            background-color: var(--bg-component); 
-            border: none;
-            color: var(--text-main);
-            padding: 8px 24px;
-            border: 1px solid var(--neutral-300);
-            border-radius: 50px; 
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+            .filter-btn {
+                background-color: var(--bg-component); 
+                border: none;
+                color: var(--text-main);
+                padding: 8px 24px;
+                border: 1px solid var(--neutral-300);
+                border-radius: 50px; 
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            
+            .filter-btn:hover {
+                background-color: var(--bg-filter); 
+                color: var(--text-main); 
+            }
+            .filter-btn.active {
+                background-color: var(--red-700); 
+                font-weight: var(--fw-med);
+                color: var(--text-filter); 
+            }
 
-        .filter-btn.active {
-            background-color: var(--accent); 
-            color: #11131f; 
-        }
-
-        .filter-btn:hover {
-            background-color: var(--bg-filter); 
-            color: var(--text-main); 
-        }
     
 
     .extension-card {
@@ -210,7 +212,7 @@
                     transition: all 0.2s ease;
                 }
                     .btn-remove:hover{
-                        background-color: var(--accent); /* Màu xám xanh tối (theo style Github/Deep Navy) */
+                        background-color: var(--red-700); /* Màu xám xanh tối (theo style Github/Deep Navy) */
                         color: var(--neutral-800);    
                         padding: 6px 14px;
                         border-radius: 20px;       
@@ -241,7 +243,7 @@
         }
 
             .toggle-box.active {
-                background-color: var(--accent);
+                background-color: var(--red-700);
             }
 
             .toggle-box.active .dot {
